@@ -6,16 +6,30 @@
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px Helvetica, Arial; }
       form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      form input { border: 0; padding: 10px; width: 80%; margin-right: .5%; }
+      form button { height: inherit; width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      form label { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+
+
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
     </style>
   </head>
   <script src="/socket.io/socket.io.js"></script>
+  <script src="/jquery-2.1.1.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/socket.io-stream.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
   <script>
+
+  var loadFile = function(event) {
+  	var image = document.getElementById('output');
+  	image.src = URL.createObjectURL(event.target.files[0]);
+  };
+
+
+
     $(function () {
       var socket = io();
       $('form').submit(function(){
@@ -25,13 +39,41 @@
       });
       socket.on('chat message', function(msg){
         $('#messages').append($('<li>').text(msg));
+        $("#messages").append($('<li>').append($('#output')));
+
+
+
+
+
       });
     });
+
+
+
+
   </script>
   <body>
     <ul id="messages"></ul>
     <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
+      <input id="m" autocomplete="off" />
+      <input id="file" type="file"  accept="image/*" name="pic" onchange="loadFile(event)" style="display: none;">
+      <label for="file" style="cursor: pointer;">Attach</label>
+      <button style="cursor: pointer;">Send</button>
+
+      <img id="output" type="image" width="50" />
+
+
+
+
+
+
+
+
+
+
+
+
+
     </form>
   </body>
 </html>
