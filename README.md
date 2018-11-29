@@ -19,7 +19,11 @@ The chatroom will allow users to login from multiple devices, type in their user
 # Deliverables
 
 1. Chatroom frontend (HTML/CSS/Javascript)
+    -Provides Image encoding/decoding
+    -Provides emoji support
 2. Chatroom backend (Python/Setting Up Local Server)
+    -Allows multiple users to connect at any given time
+    -Boradcasts all connections and messages to server console
 3. Documentation
 
 # Plan
